@@ -1,6 +1,7 @@
 local push = require "push"
 Class= require "class"
 require 'Bird'
+require 'Pipe'
 width=1200
 height=720
 
@@ -26,6 +27,7 @@ function love.load()
       fullscreen=false,
       resizable=true
     })
+    love.keyboard.keysPressed={}
 
 end
 
@@ -36,16 +38,38 @@ function love.resize(w,h)
     push:resize(w,h)
 end
 
+
+
+
+
+
+
 function love.keypressed(key)
+
+    love.keyboard.keysPressed[key]=true
+
     if key=='escape' then
         love.event.quit()
 
     end
 end
 
+function love.keyboard.wasPressed(key)
+    if love.keyboard.keysPressed[key] then
+        return true
+    else
+        return false
+    end
+end
+  
+
+
 function love.update(dt)
     backgroundScroll=(backgroundScroll + BG_scroll_speed+dt)%Background_looping_point
     groundScroll=(groundScroll + G_scroll_speed+dt)%virtual_width
+
+    bird:update(dt)
+    love.keyboard.keysPressed={}
 end
 
 function love.draw()
