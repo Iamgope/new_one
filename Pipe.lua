@@ -1,8 +1,8 @@
-Pipe=class{}
+Pipe = Class{}
 
 local pipe_img=love.graphics.newImage('pipe.png')
 
-local pipe_scroll=-60
+local pipe_scroll=-3
 
 function Pipe:init()
     self.x=virtual_width
